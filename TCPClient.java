@@ -8,9 +8,9 @@ abstract class TCPClient {
 	final String HOST = "127.0.0.1";
 	final int PORT = 8888;
 	final String CHANNEL = "abc";
-	final Charset CHAR_CODE = StandardCharsets.US_ASCII;
 	final String OK_MESSAGE = "OK";
 	final String DISCONNECT_SIGN = "DISCONNECT";
+	final Charset CHAR_CODE = StandardCharsets.US_ASCII;
 	final int BUFFER_SIZE = 1024;
 
 	protected enum ClientId {
