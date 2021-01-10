@@ -8,4 +8,5 @@ Sender ×1(左)とReceiver ×2(中央・右)によるソケット通信の様子
 ![demo](https://user-images.githubusercontent.com/52157596/104133039-6bab0e80-53c4-11eb-8b99-6abc4ff7d79a.gif)
 
 # クラス図
-![class](https://user-images.githubusercontent.com/52157596/104135635-b765b400-53d4-11eb-81f0-9c9f7eae3183.png)
+![class](https://user-images.githubusercontent.com/52157596/104135959-766e9f00-53d6-11eb-9b2c-e0386e94c472.png)
+
