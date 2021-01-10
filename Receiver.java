@@ -6,8 +6,8 @@ public class Receiver {
 
 	static class ReceiverClient extends TCPClient {
 		@Override
-		void initClientId() {
-			this.clientId = ClientId.RECEIVER;
+		void initClientType() {
+			this.clientType = ClientType.RECEIVER;
 		}
 
 		@Override

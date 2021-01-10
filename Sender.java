@@ -17,8 +17,8 @@ public class Sender {
 		}
 
 		@Override
-		void initClientId() {
-			this.clientId = ClientId.SENDER;
+		void initClientType() {
+			this.clientType = ClientType.SENDER;
 		}
 
 		@Override

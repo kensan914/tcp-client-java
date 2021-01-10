@@ -13,17 +13,17 @@ abstract class TCPClient {
 	final Charset CHAR_CODE = StandardCharsets.US_ASCII;
 	final int BUFFER_SIZE = 1024;
 
-	protected enum ClientId {
+	protected enum ClientType {
 		SENDER((byte) 0x1), RECEIVER((byte) 0x2),;
 
 		public final byte id;
 
-		private ClientId(final byte _id) {
+		private ClientType(final byte _id) {
 			this.id = _id;
 		}
 	}
 
-	protected ClientId clientId;
+	protected ClientType clientType;
 
 	Socket socket;
 	InputStream in;
@@ -62,7 +62,7 @@ abstract class TCPClient {
 
 		byte[] headerBytes = new byte[headerChannelBytes.length + 1];
 		System.arraycopy(headerChannelBytes, 0, headerBytes, 1, headerChannelBytes.length);
-		headerBytes[0] = this.clientId.id;
+		headerBytes[0] = this.clientType.id;
 		return (headerBytes);
 	}
 
@@ -89,11 +89,11 @@ abstract class TCPClient {
 	}
 
 	public TCPClient() {
-		this.initClientId();
+		this.initClientType();
 		this.connect();
 	}
 
-	abstract void initClientId();
+	abstract void initClientType();
 
 	abstract void run();
 }
