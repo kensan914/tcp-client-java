@@ -11,14 +11,14 @@ public class Sender {
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
 		@Override
-		void initClientId() {
-			this.clientId = ClientId.SENDER;
-		}
-
-		@Override
 		void disconnect() throws Exception {
 			this.input.close();
 			super.disconnect();
+		}
+
+		@Override
+		void initClientType() {
+			this.clientType = ClientType.SENDER;
 		}
 
 		@Override

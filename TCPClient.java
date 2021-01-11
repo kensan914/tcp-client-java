@@ -8,22 +8,22 @@ abstract class TCPClient {
 	final String HOST = "127.0.0.1";
 	final int PORT = 8888;
 	final String CHANNEL = "abc";
-	final Charset CHAR_CODE = StandardCharsets.US_ASCII;
 	final String OK_MESSAGE = "OK";
 	final String DISCONNECT_SIGN = "DISCONNECT";
+	final Charset CHAR_CODE = StandardCharsets.US_ASCII;
 	final int BUFFER_SIZE = 1024;
 
-	protected enum ClientId {
+	protected enum ClientType {
 		SENDER((byte) 0x1), RECEIVER((byte) 0x2),;
 
 		public final byte id;
 
-		private ClientId(final byte _id) {
+		private ClientType(final byte _id) {
 			this.id = _id;
 		}
 	}
 
-	protected ClientId clientId;
+	protected ClientType clientType;
 
 	Socket socket;
 	InputStream in;
@@ -61,8 +61,9 @@ abstract class TCPClient {
 		byte[] headerChannelBytes = headerChannel.getBytes(this.CHAR_CODE);
 
 		byte[] headerBytes = new byte[headerChannelBytes.length + 1];
+		// headerBytesにheaderChannelBytesをコピー。ただし、先頭要素は空ける。
 		System.arraycopy(headerChannelBytes, 0, headerBytes, 1, headerChannelBytes.length);
-		headerBytes[0] = this.clientId.id;
+		headerBytes[0] = this.clientType.id;
 		return (headerBytes);
 	}
 
@@ -74,6 +75,8 @@ abstract class TCPClient {
 		byte[] buffer = new byte[this.BUFFER_SIZE];
 		int dataByteSize = 0;
 		while (dataByteSize < this.BUFFER_SIZE) {
+			// in.available()で入力ストリームから読み取ることのできる推定バイト数を調査。
+			// そもそも受信されている必要があるため、最初のループは評価しない。
 			if (dataByteSize > 0 && this.in.available() == 0) {
 				break;
 			}
@@ -89,11 +92,11 @@ abstract class TCPClient {
 	}
 
 	public TCPClient() {
-		this.initClientId();
+		this.initClientType();
 		this.connect();
 	}
 
-	abstract void initClientId();
+	abstract void initClientType();
 
 	abstract void run();
 }
