@@ -15,7 +15,8 @@ public class Receiver {
 			try {
 				while (true) {
 					String message = this.receive();
-					if (message == this.DISCONNECT_SIGN) { // 文字列のアドレスを比較
+					// ==で文字列のアドレスを比較することで、万が一DISCONNECT_SIGNと同文字列を受信してもbreakしない。
+					if (message == this.DISCONNECT_SIGN) {
 						break;
 					}
 					System.out.println("・" + message);
