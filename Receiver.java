@@ -20,7 +20,7 @@ public class Receiver {
 					if (message == this.DISCONNECT_SIGN) {
 						break;
 					}
-					System.out.println("・" + message);
+					System.out.println("- " + message);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
