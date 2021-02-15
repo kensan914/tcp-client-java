@@ -15,7 +15,8 @@ public class Receiver {
 			try {
 				while (true) {
 					String message = this.receive();
-					// ==で文字列のアドレスを比較することで、万が一DISCONNECT_SIGNと同文字列を受信してもbreakしない。
+					// By comparing the address of the message variable in ==, even if the same
+					// string as DISCONNECT_SIGN is received, it will not break.
 					if (message == this.DISCONNECT_SIGN) {
 						break;
 					}

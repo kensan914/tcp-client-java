@@ -61,7 +61,7 @@ abstract class TCPClient {
 		byte[] headerChannelBytes = headerChannel.getBytes(this.CHAR_CODE);
 
 		byte[] headerBytes = new byte[headerChannelBytes.length + 1];
-		// headerBytesにheaderChannelBytesをコピー。ただし、先頭要素は空ける。
+		// Copy headerChannelBytes to headerBytes. But, leave the first element empty.
 		System.arraycopy(headerChannelBytes, 0, headerBytes, 1, headerChannelBytes.length);
 		headerBytes[0] = this.clientType.id;
 		return (headerBytes);
@@ -75,8 +75,10 @@ abstract class TCPClient {
 		byte[] buffer = new byte[this.BUFFER_SIZE];
 		int dataByteSize = 0;
 		while (dataByteSize < this.BUFFER_SIZE) {
-			// in.available()で入力ストリームから読み取ることのできる推定バイト数を調査。
-			// そもそも受信されている必要があるため、最初のループは評価しない。
+			// check the bytes that can be read from the input stream with
+			// this.in.available(). (this.in.available() == 0)
+			// The first loop is not evaluated because data has not been reached yet.
+			// (dataByteSize > 0)
 			if (dataByteSize > 0 && this.in.available() == 0) {
 				break;
 			}
